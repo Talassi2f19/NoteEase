@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Note } from '../note.model';
 
 
 @Component({
@@ -8,8 +9,12 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-content.component.css']
 })
 export class DialogContentComponent {
-  title: string = "";
-  body: string = "";
+  data: Note = {
+    id: -1,
+    titolo: '',
+    testo: '',
+    bgcolor: '#0000FF',
+  };
 
   constructor(public dialogRef: MatDialogRef<DialogContentComponent>) {}
 
@@ -18,6 +23,6 @@ export class DialogContentComponent {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close(this.title);
+    this.dialogRef.close(this.data);
   }
 }

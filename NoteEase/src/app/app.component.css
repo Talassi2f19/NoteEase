@@ -9,8 +9,8 @@ section{
 section>header{
     position: relative;
 }
-section>header>h1{
-    font-size: clamp(2.5rem, 5.5vw, 7rem); 
+section>header>h2{
+    font-size: clamp(2rem, 5.5vw, 4rem); 
     font-weight: bold;
     letter-spacing: .3rem;
 }
@@ -21,4 +21,15 @@ section>button{
     right: .8rem;
     border-radius: .5rem;
     background-color: #2e92df;
+    z-index: 3;
+}
+
+#filter{
+    position: absolute;
+    z-index: 2;
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff62;
+    display: flex;
+    align-items: flex-start;
 }

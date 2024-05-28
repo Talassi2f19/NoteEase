@@ -7,18 +7,20 @@ import { MaterialModule } from './material.module';
 
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { CardComponent } from './card/card.component';
+import { CardModule } from './card/card.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogContentComponent,
-    CardComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    CardModule
   ],
   entryComponents: [DialogContentComponent],
   providers: [],

@@ -1,13 +1,16 @@
 <section>
     <header>
-        <h1>NoteEase</h1>
+        <img src="./assets/image.svg" alt="">
+        <h2>NoteEase</h2>
     </header>
 
-    <button mat-fab color="primary" (click)="openDialog()">
+    <button mat-fab color="primary" (click)="openDialog()" matTooltip="Aggiungi una nota" matTooltipPosition="left">
         <mat-icon>add</mat-icon>
     </button>
 
-    <ng-container *ngFor="let title of notes">
-        <app-card [title]="title"></app-card>
-    </ng-container>
+    <div id="filter" *ngIf="notes.length != 0">
+        <ng-container *ngFor="let note of notes">
+            <app-card [data]="note" (delete)="deleteNote($event)"></app-card>
+        </ng-container>
+    </div>
 </section>

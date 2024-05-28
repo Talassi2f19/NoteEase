@@ -10,7 +10,7 @@ import { DialogContentComponent } from './dialog-content/dialog-content.componen
 })
 export class AppComponent {
   title = 'dialog-example';
-  receivedData: string | undefined;
+  notes: string[] = [];
 
   constructor(public dialog: MatDialog) {}
 
@@ -21,8 +21,8 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.receivedData = result;
-      console.log('receivedData ' + this.receivedData);
+      this.notes.push(<string>result);
+      console.log(this.notes);
     });
   }
 }

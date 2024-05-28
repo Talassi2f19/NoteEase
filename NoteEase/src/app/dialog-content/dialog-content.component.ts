@@ -8,7 +8,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-content.component.css']
 })
 export class DialogContentComponent {
-  title: string | undefined;
+  title: string = "";
+  body: string = "";
 
   constructor(public dialogRef: MatDialogRef<DialogContentComponent>) {}
 

@@ -7,4 +7,7 @@
         <mat-icon>add</mat-icon>
     </button>
 
+    <ng-container *ngFor="let title of notes">
+        <app-card [title]="title"></app-card>
+    </ng-container>
 </section>

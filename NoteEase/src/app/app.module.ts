@@ -6,12 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogContentComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

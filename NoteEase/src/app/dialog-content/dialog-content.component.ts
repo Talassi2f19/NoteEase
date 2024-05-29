@@ -10,7 +10,7 @@ import { Note } from '../note.model';
 })
 export class DialogContentComponent {
   data: Note = {
-    id: -1,
+    id: '',
     titolo: '',
     testo: '',
     bgcolor: '#0000FF',

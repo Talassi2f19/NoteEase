@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { CardComponent } from './card/card.component';
 import { CardModule } from './card/card.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -20,6 +21,7 @@ import { CardModule } from './card/card.module';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
     CardModule
   ],
   entryComponents: [DialogContentComponent],

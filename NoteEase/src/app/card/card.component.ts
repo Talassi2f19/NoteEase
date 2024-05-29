@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Note } from '../note.model';
+import { FirebaseService } from '../servizi/firebase.service';
 
 @Component({
   selector: 'app-card',
@@ -10,20 +11,18 @@ import { Note } from '../note.model';
 
 export class CardComponent {
   @Input() data: Note = {
-    id: -1,
+    id: '',
     titolo: '',
     testo: '',
     bgcolor: '#0000FF',
   };
+  @Output() delete = new EventEmitter<string>();
+
+  deleteNote() {
+    this.delete.emit(this.data.id);
+  }
 
   showContent: boolean = false;
-
-  @Output() delete = new EventEmitter<number>();
-
-  onClickDelete() {
-    this.delete.emit(this.data.id);
-    console.log("i'd delete id card [" + this.data.id + "]");
-  }
 
   checkContent(): void{
     this.showContent = true;

@@ -8,7 +8,7 @@
     <mat-card-actions *ngIf="showContent">
       <!--TODO inserire metodo per editare la carta-->
       <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>  
-      <button mat-mini-fab color="warn" (click)="onClickDelete()"><mat-icon>delete</mat-icon></button>
+      <button mat-mini-fab color="warn" (click)="deleteNote()"><mat-icon>delete</mat-icon></button>
       <input matInput type="color" [(ngModel)]="data.bgcolor" />
     </mat-card-actions>
 </mat-card>

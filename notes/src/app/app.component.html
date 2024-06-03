@@ -1,39 +1,34 @@
-<ng-template #loggedOut>
-  <a class="pill" target="_blank" (click)="loginUnknowed()" rel="noopener">
-    <span>Login Anonimo</span>
-    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14" fill="currentColor">
-      <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
-    </svg>
-  </a>
+<mat-toolbar>
+  <span>NoteEase</span>
+  <span class="example-spacer"></span>
+  <ng-template #loggedOut>
+    <button mat-raised-button (click)="loginUnknowed()">
+      <mat-icon>person</mat-icon>
+      Anonimo
+    </button>
 
-  <a class="pill" target="_blank" (click)="loginGoogle()" rel="noopener">
-    <span>Login Google</span>
-    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14" fill="currentColor">
-      <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
-    </svg>
-  </a>
-</ng-template>
-
-<div *ngIf="user$ | async as user; else loggedOut">
-  <p>Welcome, {{ user.displayName }}!</p>
-  <a class="pill" target="_blank"  #loggedOut (click)="logout()" rel="noopener">
-    <span>Logout</span>
-    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14" fill="currentColor">
-      <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
-    </svg>
-  </a>
-</div>
-
-<div>
-  <input [(ngModel)]="message" placeholder="Type a message">
-  <button (click)="sendMessage()">Send</button>
-</div>
-
-<div *ngFor="let note of notes">
-  <div style="margin: 1rem;background-color: #eee;display: inline-block; border-radius: 1rem;padding: 1rem">
-    <p>ID: {{ note.id }}</p>
-    <p>Persona: {{ note.uid }}</p>
-    <p>Proprietà: {{ note.text }}</p>
-    <button (click)="deleteNote(note.id)">Elimina</button>
+    <button mat-raised-button (click)="loginGoogle()">
+      <mat-icon>home</mat-icon>
+      Google
+    </button>
+  </ng-template>
+  <div *ngIf="user$ | async as user; else loggedOut">
+    <button mat-raised-button #loggedOut (click)="logout()">Logout</button>
   </div>
-</div>
+</mat-toolbar>
+
+<section>
+  <header>
+      <h2>NoteEase</h2>
+  </header>
+
+  <button mat-fab color="primary" (click)="openDialog()" matTooltip="Aggiungi una nota" matTooltipPosition="left">
+      <mat-icon>add</mat-icon>
+  </button>
+
+  <div id="filter" *ngIf="notes.length != 0">
+      <ng-container *ngFor="let note of notes">
+          <app-card [data]="note" (delete)="deleteNote(note.id)" (update)="updateNote(note.id)" [nomePersona]="note.name"></app-card>
+      </ng-container>
+  </div>
+</section>

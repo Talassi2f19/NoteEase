@@ -1,0 +1,19 @@
+<mat-card class="example-card" (mouseenter)="checkContent()" (mouseleave)="decheckContent()" [ngStyle]="{'background-color': 'color-mix(in srgb,' + data.bgcolor + ' 60%, white)'}">
+  <div id="card_content">
+  <mat-card-header>
+      <mat-card-title *ngIf="data.titolo != '' && data.titolo != null && data.titolo != undefined">{{ data.titolo }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="data.testo != '' && data.testo != null && data.testo != undefined">{{ data.testo }}</p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="showContent">
+      <p id="name-chip" *ngIf="nomePersona != null">{{nomePersona}}</p>
+      <div>
+        <button mat-mini-fab color="primary" (click)="updateNote(true)"><mat-icon>edit</mat-icon></button>  
+        <button mat-mini-fab color="warn" (click)="deleteNote()"><mat-icon>delete</mat-icon></button>
+        <input matInput type="color" [(ngModel)]="data.bgcolor" />
+      </div>
+    </mat-card-actions>
+  </div>  
+</mat-card>
+  

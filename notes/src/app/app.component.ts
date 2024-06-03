@@ -5,6 +5,9 @@ import { User } from '@angular/fire/auth';
 import { initializeApp } from '@angular/fire/app';
 import { collection, doc, getDocs, getFirestore, onSnapshot } from '@angular/fire/firestore';
 import { environment } from '../environments/environments';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentComponent } from './dialog-content/dialog-content.component';
+import { Note } from './note.model';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +15,20 @@ import { environment } from '../environments/environments';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  message: string = '';
+  nota: Note = {
+    titolo: '',
+    testo: '',
+    bgcolor: ''
+  };
+
   title = 'notes';
   user$: Observable<User | null>;
   notes: any[] = [];
 
-  constructor(private loginService: LoginService) {
+  constructor(
+    private loginService: LoginService,
+    public dialog: MatDialog,
+  ) {
     this.user$ = this.loginService.user$;
   }
 
@@ -45,6 +56,17 @@ export class AppComponent implements OnInit {
 
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogContentComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe((note: Note) => {
+      console.log(note);
+      this.sendMessage(note);
+    });
+  }
+
   loginGoogle() {
     this.loginService.loginGoogle();
   }
@@ -61,10 +83,17 @@ export class AppComponent implements OnInit {
     this.loginService.deleteNote(id);
   }
 
-  async sendMessage() {
-    if (this.message.trim()) {
-      await this.loginService.addMessage(this.message);
-      this.message = '';
-    }
+  // Example method to update a note
+  updateNote(id: string) {
+    const noteId = id; // replace with the actual ID
+    const updatedData: Partial<Note> = {
+      titolo: 'Updated Title',
+      testo: 'Updated Text'
+    };
+    this.loginService.updateNote(noteId, updatedData);
+  }
+
+  async sendMessage(nota: Note) {
+    await this.loginService.addMessage(nota);
   }
 }

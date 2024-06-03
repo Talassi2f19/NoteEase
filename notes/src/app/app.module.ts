@@ -9,14 +9,20 @@ import { provideAuth,getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { connectFirestoreEmulator, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MaterialModule } from './material.module';
+import { DialogContentComponent } from './dialog-content/dialog-content.component';
+import { CardModule } from './card/card.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogContentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MaterialModule,
+    CardModule,
     FormsModule
   ],
   providers: [

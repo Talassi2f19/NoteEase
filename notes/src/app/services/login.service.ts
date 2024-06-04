@@ -85,7 +85,7 @@ export class LoginService {
     deleteDoc(doc(db, 'notes', id)); // Elimina il documento dalla collezione "notes"
   }
 
-  updateNote = async (id: string, updatedData: Partial<Note>): Promise<void> => {
+  updateNote = async (id: string, updatedData: Note): Promise<void> => {
     try {
       const db = getFirestore(initializeApp(environment.firebase));
       const noteRef = doc(db, 'notes', id);

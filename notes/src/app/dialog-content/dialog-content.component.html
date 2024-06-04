@@ -8,6 +8,10 @@
     <mat-label>Inserisci Testo</mat-label>
     <input matInput [(ngModel)]="data.testo">
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Inserisci Background</mat-label>
+    <input type="color" matInput [(ngModel)]="data.bgcolor">
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annulla</button>

@@ -2,18 +2,15 @@
   <span>NoteEase</span>
   <span class="example-spacer"></span>
   <ng-template #loggedOut>
-    <button mat-raised-button (click)="loginUnknowed()">
-      <mat-icon>person</mat-icon>
-      Anonimo
-    </button>
-
     <button mat-raised-button (click)="loginGoogle()">
       <mat-icon>home</mat-icon>
       Google
     </button>
   </ng-template>
   <div *ngIf="user$ | async as user; else loggedOut">
-    <button mat-raised-button #loggedOut (click)="logout()">Logout</button>
+    <div *ngIf="!user.isAnonymous; else loggedOut">
+      <button mat-raised-button #loggedOut (click)="logout()">Logout</button>
+    </div>
   </div>
 </mat-toolbar>
 
@@ -22,13 +19,13 @@
       <h2>NoteEase</h2>
   </header>
 
-  <button mat-fab color="primary" (click)="openDialog()" matTooltip="Aggiungi una nota" matTooltipPosition="left">
+  <button mat-fab color="primary" *ngIf="user$ != null" (click)="openDialog()" matTooltip="Aggiungi una nota" matTooltipPosition="left">
       <mat-icon>add</mat-icon>
   </button>
 
   <div id="filter" *ngIf="notes.length != 0">
       <ng-container *ngFor="let note of notes">
-          <app-card [data]="note" (delete)="deleteNote(note.id)" (update)="updateNote(note.id)" [nomePersona]="note.name"></app-card>
+          <app-card [data]="note" (delete)="deleteNote(note.id)" (update)="updateNote(note.id, $event)" [nomePersona]="note.name"></app-card>
       </ng-container>
   </div>
 </section>

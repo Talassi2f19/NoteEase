@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Note } from '../note.model';
 
@@ -8,6 +8,8 @@ import { Note } from '../note.model';
   styleUrl: './dialog-content.component.css'
 })
 export class DialogContentComponent {
+  @Input() update: boolean = false;
+
   data: Note = {
     titolo: '',
     testo: '',

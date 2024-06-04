@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
 
     // Sottoscrizione agli aggiornamenti in tempo reale della collezione "notes"
     onSnapshot(notesCollection, (snapshot) => {
+      console.log(this.loginService.currentUser?.uid);
       snapshot.docChanges().forEach(() => {
         this.notes = []; // Pulisce l'array prima di riempirlo con i nuovi dati
         snapshot.forEach((doc) => {
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
           this.notes.push(tmp); // Aggiunge i dati del documento all'array
         });
       });
+      console.log(this.notes);
     }, (error) => {
       console.error("Errore durante il recupero degli aggiornamenti:", error);
     });
@@ -68,15 +70,12 @@ export class AppComponent implements OnInit {
   }
 
   loginGoogle() {
+    this.logout();
     this.loginService.loginGoogle();
   }
 
-  loginUnknowed() {
-    this.loginService.loginUnknowned();
-  }
-
   logout() {
-    this.loginService.logout();
+    this.loginService.loginUnknowned();
   }
 
   deleteNote(id: string){
@@ -84,13 +83,10 @@ export class AppComponent implements OnInit {
   }
 
   // Example method to update a note
-  updateNote(id: string) {
+  updateNote(id: string, event: any) {
+    console.log("nota modificata" + event);
     const noteId = id; // replace with the actual ID
-    const updatedData: Partial<Note> = {
-      titolo: 'Updated Title',
-      testo: 'Updated Text'
-    };
-    this.loginService.updateNote(noteId, updatedData);
+    this.loginService.updateNote(noteId, event);
   }
 
   async sendMessage(nota: Note) {

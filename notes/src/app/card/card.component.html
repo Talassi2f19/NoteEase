@@ -9,7 +9,7 @@
     <mat-card-actions *ngIf="showContent">
       <p id="name-chip" *ngIf="nomePersona != null">{{nomePersona}}</p>
       <div>
-        <button mat-mini-fab color="primary" (click)="updateNote(true)"><mat-icon>edit</mat-icon></button>  
+        <button mat-mini-fab color="primary" (click)="updateNote()"><mat-icon>edit</mat-icon></button>  
         <button mat-mini-fab color="warn" (click)="deleteNote()"><mat-icon>delete</mat-icon></button>
         <input matInput type="color" [(ngModel)]="data.bgcolor" />
       </div>

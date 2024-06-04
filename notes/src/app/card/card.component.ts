@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Note } from '../note.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentComponent } from '../dialog-content/dialog-content.component';
 
 @Component({
   selector: 'app-card',
@@ -15,8 +17,12 @@ export class CardComponent {
     bgcolor: '#0546ff',
   };
 
-  @Output() update = new EventEmitter<boolean>();
+  @Output() update = new EventEmitter<any>();
   @Output() delete = new EventEmitter<boolean>();
+  tmp: any;
+  constructor(public dialog: MatDialog){
+
+  }
 
   showContent: boolean = false;
 
@@ -24,8 +30,26 @@ export class CardComponent {
     this.delete.emit(true);
   }
 
-  updateNote(parameter: any): void{
-    this.update.emit(parameter);
+  updateNote(): void{
+    const dialogRef = this.dialog.open(DialogContentComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe((note: Note) => {
+      this.tmp = this.data;
+      if(note.testo != "")
+        this.tmp.testo = note.testo;
+
+      if(note.titolo != "")
+        this.tmp.titolo = note.titolo;
+
+      if(note.bgcolor != "")
+        this.tmp.bgcolor = note.bgcolor;
+
+      console.log(this.tmp);
+      this.update.emit(this.tmp);
+    });
+    
   }
 
   checkContent(): void{
